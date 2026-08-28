@@ -1,0 +1,74 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+@font-face {
+  font-family: interFontRegular;
+  src: url(./fonts/inter/Inter_24pt-Regular.ttf);
+}
+
+@font-face {
+  font-family: interFontBold;
+  src: url(./fonts/inter/Inter_24pt-Bold.ttf);
+}
+
+@font-face {
+  font-family: interFontExtraBold;
+  src: url(./fonts/inter/Inter_24pt-ExtraBold.ttf);
+}
+
+@font-face {
+  font-family: interFontSemiBold;
+  src: url(./fonts/inter/Inter_18pt-SemiBold.ttf);
+}
+@font-face {
+  font-family: interFontMedium;
+  src: url(./fonts/inter/Inter_18pt-Medium.ttf);
+}
+
+:root {
+  --background: #7000FF;
+  --background__2: #0000;
+  --interReg: interFontRegular;
+  --interB: interFontBold;
+  --interSB: interFontSemiBold;
+}
+body {
+  font-family: var(--interReg);
+  background-color: #f4f4f4;
+  color: #333;
+}
+ul, li {
+  list-style: none;
+}
+a {
+text-decoration: none;
+}
+.forSearchInput{
+  position: relative;
+  display: flex;
+}
+.searchIcon{
+  position: absolute;
+  right: 10px;
+  top: 5px;
+}
+img{
+  user-select: none;
+  pointer-events: none;
+}
+.limitText {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+::-webkit-scrollbar{
+  width: 5px;
+}
+::-webkit-scrollbar-thumb{
+  background:linear-gradient(white, var(--background)) ;
+  border-radius: 8px;
+}
