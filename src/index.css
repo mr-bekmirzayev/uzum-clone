@@ -72,3 +72,7 @@ img{
   background:linear-gradient(white, var(--background)) ;
   border-radius: 8px;
 }
+.userInfsBox{
+  /* position: absolute; */
+  z-index: 1000000;
+}

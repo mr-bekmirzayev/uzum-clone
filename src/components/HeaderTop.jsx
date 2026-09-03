@@ -2,7 +2,6 @@ import { Box, Container, Flex, Image, Text } from "@mantine/core";
 import { CiLocationOn } from "react-icons/ci";
 import uzbekistanFlag from "../assets/uzbekistanFlag.png";
 
-// ushbu komponent headerning tepasida turuvchi kichik komponent hisoblanadi.
 function HeaderTop() {
   return (
     <section
