@@ -113,10 +113,11 @@ function SignUp() {
               </svg>
             </Box>
           </Flex>
-          <Title fw={600} mb={45} order={3} w={"100%"} ta={"center"}>
-            Ajoyib! Keling ro'yxatdan o'tamiz!
+          <Title fw={600} size={18} mb={45} order={3} w={"100%"} ta={"center"}>
+            Ajoyib! Keling <span style={{color: "#7000FF"}} color="">ro'yxatdan o'tamiz</span>
           </Title>
-          <label style={{ width: "100%", marginBottom: "10px" }}>
+          <div style={{width: "320px"}}></div>
+          <label style={{ width: "100%", marginBottom: "10px", fontSize: "15px" }}>
             Ismingiz:
             <TextInput
               required
@@ -126,7 +127,7 @@ function SignUp() {
               w={"100%"}
             />
           </label>
-          <label style={{ width: "100%", marginBottom: "10px" }}>
+          <label style={{ width: "100%", marginBottom: "10px", fontSize: "15px" }}>
             Emailingiz:
             <TextInput
               required

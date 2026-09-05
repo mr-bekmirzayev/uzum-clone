@@ -1,15 +1,16 @@
-import { Box, Container, Flex, Group, List, Stack, Text, Title } from "@mantine/core";
+import { Box, Button, Container, Flex, Group, List, Stack, Text, Title } from "@mantine/core";
 import React from "react";
 import { FaApple, FaGooglePlay, FaInstagramSquare, FaTelegram } from "react-icons/fa";
 import { ImFacebook2 } from "react-icons/im";
 import { IoLogoYoutube } from "react-icons/io";
+import { LuBadgeHelp } from "react-icons/lu";
 
 function Footer() {
   return (
-    <footer style={{ marginTop: "70px" }}>
-      <Container size={"100%"} px={"140"}>
+    <footer style={{ marginTop: "70px"}}>
+      <Container size={"100%"} px={140}>
         <List>
-          <Flex gap={260}>
+          <Flex justify={"space-between"}>
             <List.Item>
               <Flex direction={"column"} gap={20}>
                 <Title c={"#1F2026"} order={3}>Biz haqimizda</Title>

@@ -79,7 +79,7 @@ export default function ProductsListThree() {
         </Link>
       </Flex>
 
-      <SimpleGrid cols={{ base: 1, sm: 2, md: 4, lg: 5 }} spacing={16}>
+      <SimpleGrid cols={{ base: 2, sm: 2, md: 4, lg: 5 }} spacing={16}>
         {products?.slice(0, 10).map((item) => {
           const isLiked = wishlist.some((w) => w.id === item.id);
           const isInBasket = basket.some((b) => b.id === item.id);

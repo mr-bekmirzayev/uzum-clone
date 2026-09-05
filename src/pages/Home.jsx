@@ -8,12 +8,12 @@ import ProductsListFour from "../components/ProductsListFour";
 
 function Home() {
   return (
-    <Container size={"100%"} px={"140"}>
+    <Container size="100%" className="main-px">
       <BannerSection />
-      <ProductsList/>
-      <ProductsListTwo/>
-      <ProductsListThree/>
-      <ProductsListFour/>
+      <ProductsList />
+      <ProductsListTwo />
+      <ProductsListThree />
+      <ProductsListFour />
     </Container>
   );
 }

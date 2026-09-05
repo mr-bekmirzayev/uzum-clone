@@ -70,7 +70,7 @@ export default function CategoryPage() {
   };
 
   return (
-    <Container size="100%" px={140} mt={25} mb={80}>
+    <Container size="100%" className="main-px" mt={25} mb={80}>
       <Flex align="center" gap={8} mb={20}>
         <Link
           to="/"

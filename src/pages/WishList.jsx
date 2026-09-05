@@ -32,7 +32,7 @@ function WishList() {
   };
 
   return (
-    <Container size="100%" px={140} mt={25} mb={100}>
+    <Container size="100%" className="main-px" mt={25} mb={100}>
       <Title order={1} size={26} fw={700} c="#1f2026" mb={24}>
         Istaklarim <Text span c="#8B8E99" fw={400} size={22}>({wishList.length} ta)</Text>
       </Title>

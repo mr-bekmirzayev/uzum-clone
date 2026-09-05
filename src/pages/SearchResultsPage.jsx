@@ -52,7 +52,7 @@ export default function SearchResultsPage() {
   };
 
   return (
-    <Container size="100%" px={140} mt={25} mb={100}>
+    <Container size="100%" className="main-px" mt={25} mb={100}>
       <Flex align="center" gap={8} mb={20}>
         <Link
           to="/"

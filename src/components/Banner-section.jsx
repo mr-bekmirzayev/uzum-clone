@@ -1,7 +1,7 @@
 import { Box, Flex, Image } from "@mantine/core";
 import { useEffect, useState } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-import banner1 from "../assets/main__banner.png";
+import banner1 from "../assets/UzumMainImg.jpg";
 import banner2 from "../assets/muddatliTolovBanner.png";
 import banner3 from "../assets/issiqTexnikalar.png";
 import banner4 from "../assets/elektronika.png";
@@ -81,6 +81,7 @@ export default function BannerSection() {
       </Box>
 
       <button
+      className="heroScrollButtonLeft"
         onClick={handlePrev}
         style={{
           position: "absolute",
@@ -101,15 +102,18 @@ export default function BannerSection() {
           boxShadow: "0 2px 10px rgba(0,0,0,0.15)",
           zIndex: 5,
           transition: "all 0.2s ease",
-        }}
+        }} 
         onMouseEnter={(e) => (e.currentTarget.style.background = "#ffffff")}
         onMouseLeave={(e) => (e.currentTarget.style.background = "rgba(255, 255, 255, 0.85)")}
       >
-        <FaChevronLeft size={16} />
+        <FaChevronLeft className="HeroButton" />
       </button>
 
       <button
         onClick={handleNext}
+        className="heroScrollButtonRight"
+
+        
         style={{
           position: "absolute",
           top: "50%",
@@ -133,7 +137,7 @@ export default function BannerSection() {
         onMouseEnter={(e) => (e.currentTarget.style.background = "#ffffff")}
         onMouseLeave={(e) => (e.currentTarget.style.background = "rgba(255, 255, 255, 0.85)")}
       >
-        <FaChevronRight size={16} />
+        <FaChevronRight className="HeroButton" />
       </button>
 
       <Flex

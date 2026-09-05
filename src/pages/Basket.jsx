@@ -1,4 +1,5 @@
 import {
+  Alert,
   Box,
   Button,
   Container,
@@ -11,9 +12,16 @@ import {
 import { Link } from "react-router-dom";
 import { TbTrash } from "react-icons/tb";
 import { useState, useEffect } from "react";
-import { getBasketFromStorage, parsePrice, formatPrice } from "../utils/storageHelper";
+import {
+  getBasketFromStorage,
+  parsePrice,
+  formatPrice,
+} from "../utils/storageHelper";
+import { LuBadgeHelp } from "react-icons/lu";
+import { IoMdHelpCircle } from "react-icons/io";
 
 function Basket() {
+  const [showAlert, setShowAlert] = useState(false);
   const [basketProducts, setBasketProducts] = useState(getBasketFromStorage());
 
   useEffect(() => {
@@ -25,11 +33,13 @@ function Basket() {
       window.removeEventListener("storage_basket_updated", handleStorageChange);
     };
   }, []);
-
+  const messageHelp = () => {
+    alert("BackEnd yozilmagani sababli ushbu buyruq ishlamaydi.")
+  };
   const updateStorageAndState = (newItems) => {
     setBasketProducts(newItems);
     const flat = newItems.flatMap((item) =>
-      Array(item.quantity || 1).fill({ ...item, quantity: undefined })
+      Array(item.quantity || 1).fill({ ...item, quantity: undefined }),
     );
     localStorage.setItem("mahsulot", JSON.stringify(flat));
     window.dispatchEvent(new Event("storage_basket_updated"));
@@ -37,7 +47,7 @@ function Basket() {
 
   const increaseQty = (id) => {
     const updated = basketProducts.map((item) =>
-      item.id === id ? { ...item, quantity: (item.quantity || 1) + 1 } : item
+      item.id === id ? { ...item, quantity: (item.quantity || 1) + 1 } : item,
     );
     updateStorageAndState(updated);
   };
@@ -45,7 +55,7 @@ function Basket() {
   const decreaseQty = (id) => {
     const updated = basketProducts
       .map((item) =>
-        item.id === id ? { ...item, quantity: (item.quantity || 1) - 1 } : item
+        item.id === id ? { ...item, quantity: (item.quantity || 1) - 1 } : item,
       )
       .filter((item) => item.quantity > 0);
     updateStorageAndState(updated);
@@ -65,20 +75,25 @@ function Basket() {
     return text;
   };
 
-  const totalQuantity = basketProducts.reduce((sum, item) => sum + (item.quantity || 1), 0);
+  const totalQuantity = basketProducts.reduce(
+    (sum, item) => sum + (item.quantity || 1),
+    0,
+  );
   const totalPrice = basketProducts.reduce(
     (sum, item) => sum + parsePrice(item.price) * (item.quantity || 1),
-    0
+    0,
   );
   const totalOldPrice = basketProducts.reduce(
-    (sum, item) => sum + parsePrice(item.oldPrice || item.price) * (item.quantity || 1),
-    0
+    (sum, item) =>
+      sum + parsePrice(item.oldPrice || item.price) * (item.quantity || 1),
+    0,
   );
-  const discountAmount = totalOldPrice > totalPrice ? totalOldPrice - totalPrice : 0;
+  const discountAmount =
+    totalOldPrice > totalPrice ? totalOldPrice - totalPrice : 0;
 
   if (basketProducts.length === 0) {
     return (
-      <Container size="100%" px={140} mt={30} mb={100}>
+      <Container size="100%" className="main-px" mt={30} mb={100}>
         <Flex
           direction="column"
           align="center"
@@ -91,7 +106,8 @@ function Basket() {
             border: "1px solid #f0f0f0",
           }}
         >
-          <Image radius={20}
+          <Image
+            radius={20}
             w={120}
             fallbackSrc="https://placehold.co/120x120?text=:("
             alt="Bo'sh savat"
@@ -100,7 +116,8 @@ function Basket() {
             Savatingiz hozircha bo'sh
           </Title>
           <Text c="#8B8E99" size="15px" ta="center" maw={420}>
-            Bosh sahifadagi qiziqarli to'plamlardan boshlang yoki qidiruvdan foydalaning
+            Bosh sahifadagi qiziqarli to'plamlardan boshlang yoki qidiruvdan
+            foydalaning
           </Text>
           <Link to="/" style={{ textDecoration: "none", marginTop: "10px" }}>
             <Button
@@ -121,12 +138,26 @@ function Basket() {
   }
 
   return (
-    <Container size="100%" px={140} mt={25} mb={100}>
-      <Title order={1} size={26} fw={700} c="#1f2026" mb={24}>
-        Savatingiz, <Text span c="#8B8E99" fw={400} size={22}>{totalQuantity} ta mahsulot</Text>
+    <Container size="100%" className="main-px" mt={-55} mb={150}>
+      <Title mt={-202} mb={-150} order={1} size={26} fw={700} c="#1f2026">
+        Savatingiz,{" "}
+        <Text span c="#8B8E99" fw={400} size={22}>
+          {totalQuantity} ta mahsulot
+        </Text>
       </Title>
-
-      <Flex gap={30} align="flex-start" direction={{ base: "column", lg: "row" }}>
+      {/* <Flex
+        align={"center"}
+        justify={"center"}
+        style={{ position: "relative", cursor: "pointer" }}
+      >
+        <button className="helperButton"></button>
+        <IoMdHelpCircle size={24} className="helperIcon" color="black" />
+      </Flex> */}
+      <Flex
+        gap={30}
+        align="flex-start"
+        direction={{ base: "column", lg: "row" }}
+      >
         <Box style={{ flex: 1, width: "100%" }}>
           <Box
             style={{
@@ -138,7 +169,9 @@ function Basket() {
           >
             {basketProducts.map((item, index) => {
               const itemPrice = parsePrice(item.price);
-              const itemOldPrice = item.oldPrice ? parsePrice(item.oldPrice) : null;
+              const itemOldPrice = item.oldPrice
+                ? parsePrice(item.oldPrice)
+                : null;
               const qty = item.quantity || 1;
 
               return (
@@ -253,14 +286,20 @@ function Basket() {
                         padding: "8px",
                         transition: "color 0.2s ease",
                       }}
-                      onMouseEnter={(e) => (e.currentTarget.style.color = "#ff4d4f")}
-                      onMouseLeave={(e) => (e.currentTarget.style.color = "#8B8E99")}
+                      onMouseEnter={(e) =>
+                        (e.currentTarget.style.color = "#ff4d4f")
+                      }
+                      onMouseLeave={(e) =>
+                        (e.currentTarget.style.color = "#8B8E99")
+                      }
                       title="O'chirish"
                     >
                       <TbTrash size={20} />
                     </button>
                   </Flex>
-                  {index < basketProducts.length - 1 && <hr style={{ border: "0.5px solid #f2f4f7", margin: 0 }} />}
+                  {index < basketProducts.length - 1 && (
+                    <hr style={{ border: "0.5px solid #f2f4f7", margin: 0 }} />
+                  )}
                 </Box>
               );
             })}
@@ -282,15 +321,22 @@ function Basket() {
           </Title>
 
           <Flex justify="space-between" mb={10}>
-            <Text size="14.5px" c="#8B8E99">Mahsulotlar ({totalQuantity}):</Text>
+            <Text size="14.5px" c="#8B8E99">
+              Mahsulotlar ({totalQuantity}):
+            </Text>
             <Text size="14.5px" fw={600} c="#1f2026">
-              {formatPrice(totalOldPrice > totalPrice ? totalOldPrice : totalPrice)} so'm
+              {formatPrice(
+                totalOldPrice > totalPrice ? totalOldPrice : totalPrice,
+              )}{" "}
+              so'm
             </Text>
           </Flex>
 
           {discountAmount > 0 && (
             <Flex justify="space-between" mb={10}>
-              <Text size="14.5px" c="#00ba34">Tejovingiz:</Text>
+              <Text size="14.5px" c="#00ba34">
+                Tejovingiz:
+              </Text>
               <Text size="14.5px" fw={600} c="#00ba34">
                 -{formatPrice(discountAmount)} so'm
               </Text>
@@ -298,7 +344,9 @@ function Basket() {
           )}
 
           <Flex justify="space-between" mb={14}>
-            <Text size="14.5px" c="#8B8E99">Yetkazib berish:</Text>
+            <Text size="14.5px" c="#8B8E99">
+              Yetkazib berish:
+            </Text>
             <Text size="14.5px" fw={600} c="#00ba34">
               Bepul (1 kun)
             </Text>
@@ -307,7 +355,9 @@ function Basket() {
           <hr style={{ border: "0.5px solid #f2f4f7", margin: "16px 0" }} />
 
           <Flex justify="space-between" align="center" mb={20}>
-            <Text size="16px" fw={700} c="#1f2026">Jami to'lov:</Text>
+            <Text size="16px" fw={700} c="#1f2026">
+              Jami to'lov:
+            </Text>
             <Text size="22px" fw={800} c="#7000FF">
               {formatPrice(totalPrice)} so'm
             </Text>
@@ -315,6 +365,7 @@ function Basket() {
 
           <Button
             fullWidth
+            onClick={messageHelp}
             size="lg"
             radius="md"
             style={{

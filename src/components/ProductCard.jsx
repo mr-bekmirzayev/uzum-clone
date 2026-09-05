@@ -84,7 +84,7 @@ export default function ProductCard({ item, isLiked, onToggleWishlist, onAddToBa
           <Image
             src={item.images}
             alt={item.title}
-            fallbackSrc="https://placehold.co/300x400?text=Uzum+Market"
+            fallbackSrc="https://placehold.co/300x400?text=Rasmni+yuklashni+iloji+bo'lmadi"
             fit="cover"
             style={{
               position: "absolute",

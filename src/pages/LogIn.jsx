@@ -22,6 +22,7 @@ function LogIn() {
     e.preventDefault()
     if(localData.email == email && localData.password == password){
       navigate("/")
+      localStorage.setItem("message", true)
     }else{
       alert("Malumotlar xato kiritildi. o'ylab yoz uka?")
     }
@@ -33,17 +34,9 @@ function LogIn() {
   const [hovered, setHovered] = useState(null);
   return (
     <Container size={"100%"} px={"140"}>
-      <Flex justify={"center"} align={"center"} h={"90vh"}>
+      <Flex style={{transition: "0.30s"}} justify={"center"} align={"center"} h={"90vh"}>
         <Box
-          style={{
-            background: "#7000FF",
-            filter: "blur(95px)",
-            position: "absolute",
-            padding: "50px",
-            zIndex: "-1",
-            right: "780px",
-            top: "360px",
-          }}
+          className="glow-effect"
         ></Box>
         <form
           style={{
@@ -62,7 +55,7 @@ function LogIn() {
           }}
         >
           <Flex justify={"center"} w={"100%"}>
-            <Box>
+            <Box className="logoLogIn">
               <svg
                 data-v-3bcdbef0=""
                 width="106"
@@ -107,9 +100,11 @@ function LogIn() {
               </svg>
             </Box>
           </Flex>
-          <Title fw={600} mb={45} order={3} w={"100%"} ta={"center"}>
-            Xush kelibsiz, ma'lumotlaringizni kiriting
+          <Title className="logInTitle" fw={400} order={3} w={"100%"} ta={"center"}>
+            Xush Keldingiz!<br/><span style={{color: "#7000FF", fontWeight: "600"}} color="">ma'lumotlaringizni xatosiz kiriting</span>
           </Title>
+          <Text className="accauntTitleLogIn" w={"100%"} size="12px" ta={"center"} mb={25} style={{lineHeight: "16px"}} c={"grey"}>Hisobingizga kirishingiz uchun sizdan ma'lumotlaringiz talab qilinadi.</Text>
+          <div style={{width: "320px"}}></div>
           <label style={{ width: "100%", marginBottom: "10px" }}>
             Emailingiz:
             <TextInput
@@ -122,7 +117,7 @@ function LogIn() {
             />
           </label>
           <label style={{ width: "100%" }}>
-            Yangi parolingiz:
+            Parolingiz:
             <PasswordInput
               required
               onChange={(e) => setPassword(e.currentTarget.value)}
@@ -141,7 +136,7 @@ function LogIn() {
               cursor: "pointer",
               transition: "0.11s",
               borderRadius: "7px",
-              marginTop: "30px",
+              marginTop: "105px",
             }}
           >
             <Group
@@ -151,7 +146,7 @@ function LogIn() {
               onMouseEnter={() => setHovered(true)}
               onMouseLeave={() => setHovered(null)}
             >
-              <Text size="20px" fw={"700"}>
+              <Text className="finallyLogInBtn" size="20px" fw={"700"}>
                 Nihoyat
               </Text>{" "}
               <FaArrowRight
